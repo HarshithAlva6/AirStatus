@@ -4,7 +4,6 @@ import '../App.css';
 
 const cancellations = (props) => {
     const cancelData = props.cancelData;
-    console.log(cancelData);
     const keys = Object.keys(cancelData);
     return (
         <div class="table-wrapper-scroll-y my-custom-scrollbar">

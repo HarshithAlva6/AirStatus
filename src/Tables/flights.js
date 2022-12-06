@@ -1,11 +1,9 @@
 import React from "react";
 import Table from 'react-bootstrap/Table';
-import {flight} from "../AirData";
 import '../App.css';
 
 const flights = (props) => {
     const flightData = props.flightData;
-    console.log(flightData);
     const keys = Object.keys(flightData);
     return (
         <div class="table-wrapper-scroll-y my-custom-scrollbar">
