@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -23,11 +24,14 @@
   color: #61dafb;
 }
 .nav-pills{
-  background-color: black;
+  background-color: cornsilk;
+  box-shadow: 5px 5px 5px red;
+  height: 100%;
 }
 .nav-item {
   margin: 10px;
-  background-color: grey;
+  background-color: whitesmoke;
+  box-shadow: 2px 2px 2px black;
 }
 #table1 {
   margin-top: 10px;
@@ -43,3 +47,38 @@ a {
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
 a:active { text-decoration: none; }
+
+.tableContainer{
+  border-radius: 20px;
+  height: 244px;
+  padding: 0 10px 10px 10px;
+  overflow: scroll;
+}
+h2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 800;
+  margin: 15px auto;
+}
+h5 {
+  color: black;
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}
+thead {
+  position: sticky;
+  width: 100%;
+  top: 0px;
+  z-index: 10;
+  background-color: white;
+  border: 1px 1px;
+}
+svg{
+  height: 10%;
+  width: 100%;
+}

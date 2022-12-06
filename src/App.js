@@ -1,27 +1,43 @@
 import './App.css';
 import React, { useState } from 'react';
-import Factors from './Tables/factors';
-import Months from './Tables/months';
+import AllFlights from './Tables/allFlight';
 import Flights from './Tables/flights';
+import Cancellations from './Tables/cancellations';
+import Graphs from './Tables/graphs';
+import Papa from 'papaparse';
+import cancel from './DataFiles/cancellations.csv';
+import combined from './DataFiles/combined.csv';
+import airlines from './DataFiles/airlines.csv';
 
 function App() {
-  const [useComp,setComp] = useState();
-  const whichComp = (vals) => {
-    var renderedComp;
-    console.log(vals);
-    if (vals === "month")
-      renderedComp = <Months />;
-    else if (vals === "factor")
-      renderedComp = <Factors />;
-    else 
-      renderedComp = <Flights />;
-    setComp(renderedComp);
+  const [useComp, setComp] = useState();
+  var renderedComp;
+
+  const thisComp = (vals, comp) => {
+    Papa.parse( comp, {
+      header: true,
+      delimiter: ',',
+      download: true,
+      complete: function (input) {
+        console.log(input);
+        if (vals === "flight")
+          renderedComp = <Flights flightData = {input.data} />
+        else if (vals === "allflight")
+          renderedComp = <AllFlights allData = {input.data} />
+        else if (vals === "cancel")
+          renderedComp = <Cancellations cancelData = {input.data} />
+        else
+          renderedComp = <Graphs graphData = {input.data} />
+        setComp(renderedComp);
+      },
+      error: err => console.log("ERROR", err)
+    } );
   }
   return (
     <div className="App">
       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div id ="heading">
-          <h2>AirStat - Flight Status Informatics</h2>
+          <h1>AirStat - Flight Status Informatics</h1>
         </div>
       </nav>
       <div class="container-fluid h-100">
@@ -29,13 +45,16 @@ function App() {
             <div class="col-2" id="green">
                 <ul class="nav nav-pills flex-column mb-auto">
                   <li class = "nav-item">
-                    <a href="#" onClick={() => whichComp("flight")}><h5>Flight Based Delays</h5></a>
+                    <a href="#" onClick={() => thisComp("flight", combined)}><h5>Flight Based Delays</h5></a>
                   </li>
                   <li class = "nav-item">
-                    <a href="#" onClick={() => whichComp("month")}><h5>Month Based Delays</h5></a>
+                    <a href="#"onClick={() => thisComp("graph", combined)}><h5>Chart</h5></a>
                   </li>
                   <li class = "nav-item">
-                    <a href="#"onClick={() => whichComp("factor")}><h5>Factors Affecting Delays</h5></a>
+                    <a href="#"onClick={() => thisComp("allflight", airlines)}><h5>Current Flights</h5></a>
+                  </li>
+                  <li class = "nav-item">
+                    <a href="#"onClick={() => thisComp("cancel",cancel)}><h5>Flight Cancellations</h5></a>
                   </li>
                 </ul>
             </div>

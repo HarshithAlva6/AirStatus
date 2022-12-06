@@ -32,3 +32,15 @@ export const flight = [
     cancel: 3.6
     }
 ]
+export const allFlights = [
+    {
+    flightCode: "UA 5102",
+    description: "United Airlines"
+    }
+]
+export const cancellation = [
+    {
+    flightCode: "UA 5102",
+    cancelNo: 17
+    }
+]
